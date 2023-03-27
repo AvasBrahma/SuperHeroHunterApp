@@ -59,7 +59,7 @@ body{
 
 .search-element{
     font-family: inherit;
-    font-size: 1.3rem;
+    font-size: 1.8rem;
     outline: 0;
     border: none;
     background-color: transparent;
@@ -68,23 +68,79 @@ body{
 
 }
 .header-search{
+    position: relative;
     display: flex;
-    border: 2px solid rgb(4, 4, 4);
+    border: 2px solid rgb(126, 123, 123);
     width: 50%;
     align-items: center;
     margin: auto;
-    padding: 1rem 1rem;
     border-radius: 3rem;
     min-width: 420px;
     background-color: white;
+    display: block;
+    box-shadow: 0px 1px 5px 3px rgba(0, 0, 0, 0.12);
     
 
 }
 .header-search input{
-    width: 510px;
+    width: 460px;
+    /* border: 2px solid rebeccapurple; */
+    margin-left: -2rem;
+    margin-top: 2rem;
+}  
+
+.autocom-box{
+   /* border: 2px solid rgb(168, 27, 27); */
+   width: 460px;
+   border-radius: 3rem;
+   max-height: 280px;
+   overflow-y: auto;
+   margin: auto;
+   padding: 1rem 1rem;
+   opacity: 0;
+   margin-left: -0.1rem;
+   pointer-events: none;
+
+   
+   
 }
+
+.header-search.active .autocom-box{
+
+   opacity: 1;
+   pointer-events: auto;
+
+}
+
+.autocom-box li{
+    list-style: none;
+    padding: 2px 5px;
+    border-radius: 3rem;
+    text-align: left;
+    margin: auto;
+    font-family: inherit;
+    font-size: 1.3rem;
+    display: none;
+}
+
+.autocom-box li:hover{
+    background: #efefef;
+}
+
+.header-search.active .autocom-box li{
+
+    display: block;
+
+}
+
+
 .search-btn{
-    font-size: 2.3rem;
+    position: absolute;
+    /* border: 2px solid yellow; */
+    margin: auto;
+    right: 18px;
+    top: 1rem;
+    font-size: 2.4rem;
     cursor: pointer;
     color: rgb(231, 3, 3);
 }
@@ -92,19 +148,12 @@ body{
 
 
 /*  Super Hero Container Style */
-
-
 .load-superhero{
     max-width: 1280px;
     margin: 0 auto;
     padding: 2rem;
     background: #fff;
     text-align: center;
- 
-   
-
-    
-
 }
 
 #super-hero{
@@ -116,13 +165,16 @@ body{
      overflow: hidden;
      box-shadow: 0 4px 21px -12px, rgba(0, 0, 0, 0.79);
      margin: 2rem 0;
-    border: 2px solid black;
+     border: 2px solid black;
+     
+     
 
 }
 
 .hero-img img{
     width: 100%;
     display: block;
+    max-height: 300px;
     
 }
 
@@ -130,6 +182,7 @@ body{
     padding: 1.5rem 0.5rem;
     font-family: 'roboto condensed';
     font-weight: bold;
+
 }
 
 .hero-name h3{
@@ -199,6 +252,8 @@ body{
         margin-left: auto;
         margin-right: auto;
     }
+
+    
     
 }
 
