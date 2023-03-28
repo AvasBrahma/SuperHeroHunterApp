@@ -8,8 +8,12 @@ const superheroContainter=document.getElementById('super-hero');
 const searchContainer=document.querySelector('.header-search');
 const suggestionBox=document.querySelector('.autocom-box');
 
+
 searchButton.addEventListener('click', findSeachHero);
 document.addEventListener('DOMContentLoaded', renderHomePage);
+// fvtbutton.addEventListener('click', addToFavt);
+superheroContainter.addEventListener('click', checkHeroContainerAction)
+
 const inputbox=document.querySelector('.search-hero');
 
 
@@ -125,7 +129,8 @@ function showSuggestion(suggestion){
           <div class="hero-name">
               <h3>${listofHero.name}</h3>
               <a href="" class="hero-details-btn">Show Details</a>
-              <a href="" class="add-to-favourite"><i class="fa-solid fa-heart"></i></a>
+              <button class="add-to-favourite"><i class="fa-solid fa-heart fvt"  id=${listofHero.id}></i></button>
+              
           </div>
           </div>
           `;
@@ -134,5 +139,40 @@ function showSuggestion(suggestion){
        
    }
    superheroContainter.innerHTML=html;
+
+}
+
+function checkHeroContainerAction(e){
+   console.log("Added to Favourite checking");
+      console.log(e.target);
+      const item=e.target;
+     
+      if(item.classList[2]=="fvt"){
+         const favtheroSelected=item.parentElement;
+         console.log('fvt-parentelement :',favtheroSelected);
+         favtheroSelected.classList.add("favourite-added");
+         var favId=favtheroSelected.childNodes[0].id;
+         savefvtToLocal(favId);
+ 
+     }
+ }
+       
+
+
+
+
+ function savefvtToLocal(favourite){
+
+   //checl already there 
+   let lstfavourites;
+   if(localStorage.getItem('lstfavourites')==null){
+      lstfavourites=[];
+   } else {
+       console.log(JSON.parse(localStorage.getItem('lstfavourites')));
+       lstfavourites=JSON.parse(localStorage.getItem('lstfavourites'));
+   }
+   lstfavourites.push(favourite);
+   localStorage.setItem("lstfavourites", JSON.stringify(lstfavourites));
+
 
 }
