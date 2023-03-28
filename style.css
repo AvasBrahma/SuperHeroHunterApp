@@ -59,7 +59,7 @@ body{
 
 .search-element{
     font-family: inherit;
-    font-size: 1.8rem;
+    font-size: 1.9rem;
     outline: 0;
     border: none;
     background-color: transparent;
@@ -75,7 +75,7 @@ body{
     align-items: center;
     margin: auto;
     border-radius: 3rem;
-    min-width: 420px;
+    min-width: 380px;
     background-color: white;
     display: block;
     box-shadow: 0px 1px 5px 3px rgba(0, 0, 0, 0.12);
@@ -90,14 +90,12 @@ body{
 }  
 
 .autocom-box{
-    /* border: 2px solid rgb(168, 27, 27); */ */
-   width: 460px;
+    /* border: 2px solid rgb(168, 27, 27); */ 
    border-radius: 3rem;
-   max-height: 280px;
    overflow-y: auto;
    margin: auto;
    padding: 1rem 1rem;
-    /* opacity: 0;  */
+   opacity: 0;   
    margin-left: -0.1rem;
    pointer-events: none;
 
@@ -115,20 +113,23 @@ body{
 
 
 .autocom-box li{
-    border: 2px solid rebeccapurple;
+    /* border: 2px solid rebeccapurple; */
     list-style: none;
-    padding: 2px 5px;
+    padding: 1px 3px;
     border-radius: 3rem;
     text-align: left;
     margin: auto;
     font-family: inherit;
     font-size: 1.3rem;
-    /* display: none; */
+    max-height: 60px;
+      display: none;   
 }
 .AddToFavt-btn{
-    /* position: absolute; */
-    margin-left: 19rem;
+    text-align: right;
+    right: 0;
     margin-right: 1rem;
+    float: right;
+    font-size: 18px;
     background-color: rgb(188, 30, 30);
     border: 2px solid black;
 }
@@ -145,8 +146,8 @@ body{
     position: absolute;
     /* border: 2px solid yellow; */
     margin: auto;
-    right: 18px;
-    top: 1rem;
+    right: 16px;
+    top: 2rem;
     font-size: 2.4rem;
     cursor: pointer;
     color: rgb(231, 3, 3);
@@ -263,7 +264,7 @@ body{
 
 /* Media Queries for SuperHero Container */
 
-@media screen and (min-width: 500px){
+@media screen and (width: 500px){
 
 
     body{

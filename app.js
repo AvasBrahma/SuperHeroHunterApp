@@ -51,7 +51,7 @@ const inputbox=document.querySelector('.search-hero');
             })
 
              suggestionArray=emptyArray.map((data)=>{
-               return data='<li>'+data+'</li>';
+               return data='<li>'+data+'<button class="AddToFavt-btn">AddToFavt</button></li>';
             })
 
         } else {
