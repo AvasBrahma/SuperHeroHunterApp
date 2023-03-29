@@ -123,11 +123,13 @@ body{
     border-radius: 0.8rem;
     transition: all 0.4s linear;
     margin-left: 120px;
+    
    
 
 }
 .favourite-added{
     color: #ec1d24;
+    cursor: pointer;
 }
 
 /* Media Queries for SuperHero Container */
