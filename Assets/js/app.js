@@ -129,7 +129,7 @@ function suggestionSearchHero(e){
          var favId=item.id;
          console.log("FvtID=",favId);
          savefvtToLocal(favId);
-         toastr.success("Added to favourite")
+      
           }
         } else{
          console.log("Iside suggestion Search Hero", item);
