@@ -1,5 +1,5 @@
 //public key:c6a98dad0694af1086e032725e906e63
-//privareKey:2379479983331c3043831c076dc97ba015ee690b
+//privareKey:
 //hash MD5= 8ff042df82c2883916fd6cb327514f6a
 
 
@@ -9,7 +9,7 @@ const searchContainer=document.querySelector('.header-search');
 const suggestionBox=document.querySelector('.autocom-box');
 const superHeroDetailsContainer=document.querySelector('.hero-details-content');
 const heroDetailCloseBtn=document.querySelector('.details-close-btn');
-
+const inputbox=document.querySelector('.search-hero');
 
 
 heroDetailCloseBtn.addEventListener('click', ()=>{
@@ -23,15 +23,15 @@ heroDetailCloseBtn.addEventListener('click', ()=>{
 suggestionBox.addEventListener('click', suggestionSearchHero);
 searchButton.addEventListener('click', findSeachHero);
 document.addEventListener('DOMContentLoaded', renderHomePage);
-// fvtbutton.addEventListener('click',c addToFavt);
 superheroContainter.addEventListener('click', checkHeroContainerAction)
 
-const inputbox=document.querySelector('.search-hero');
 
 
-   inputbox.onkeyup=(e)=>{
+
+let searchHero="";
+ inputbox.onkeyup=(e)=>{
     console.log(e.target.value);
-    let searchHero=e.target.value;
+    searchHero=e.target.value;
     if(searchHero.length>=3)
     {
     checkSuperHero(searchHero);
@@ -42,6 +42,8 @@ const inputbox=document.querySelector('.search-hero');
     }
    }
 
+
+  // This Function is call when user type the search Text More Than 2 characters and search the heros
  function checkSuperHero(searchItem){
     let suggestionArray=[];
      let emptyArray=[];
@@ -55,7 +57,7 @@ const inputbox=document.querySelector('.search-hero');
 
              if(listofHero.name.toLocaleLowerCase().startsWith(searchItem.toLocaleLowerCase()))
              {
-                emptyArray.push(listofHero.name);
+                emptyArray.push(listofHero);
              }else
              {
 
@@ -63,12 +65,16 @@ const inputbox=document.querySelector('.search-hero');
             })
 
              suggestionArray=emptyArray.map((data)=>{
-               return data='<li>'+data+'<button class="AddToFavt-btn">AddToFavt</button></li>';
+               // console.log('Empty Array :',data);
+              if(isHeroAddedToFvt(data.id)){
+                   
+               return data='<li>'+data.name+'<button class="AddToFavt-btn favourite-added" id="'+data.id+'">AddToFavt</button></li>';
+
+              }{
+               return data='<li>'+data.name+'<button class="AddToFavt-btn" id="'+data.id+'">AddToFavt</button></li>';
+              }
+
             })
-            // let allSuggestion=suggestionBox.querySelectorAll("li");
-            // for(let i=0;i<allSuggestion.length;i++){
-            //  allSuggestion[i].setAttibute("onclick", "suggestionSearchHero(this)");
-            // }
 
 
         } else {
@@ -77,10 +83,6 @@ const inputbox=document.querySelector('.search-hero');
 
         }
         showSuggestion(suggestionArray);
-
-
-       
-
     
         
          
@@ -88,6 +90,7 @@ const inputbox=document.querySelector('.search-hero');
 
  }
 
+ //This Function is to display the list of suggestion in Search Box
 function showSuggestion(suggestion){
       let html='';
      let listData;  
@@ -108,26 +111,31 @@ function showSuggestion(suggestion){
 
  }  
 
-
-  function suggestionSearchHero(e){
+ //This Function checks the events click in suggestion box and as per the class name it decides the action
+function suggestionSearchHero(e){
 
    e.preventDefault();
      console.log("Suggestion Search Box",e.target);
      const item=e.target;
      console.log("Iten :", item);
      if(item.classList[0]=="AddToFavt-btn"){
+      var favId=item.id;
+        if(item.classList[1]=="favourite-added"){
+         removeFromLocalStorage(favId);
+         checkSuperHero(searchHero);
 
-        item.classList.add("favourite-added");
-      //   var favId=favtheroSelected.childNodes[0].id;
-      //   savefvtToLocal(favId);
-
-
+          }else{
+         item.classList.add("favourite-added");
+         var favId=item.id;
+         console.log("FvtID=",favId);
+         savefvtToLocal(favId);
+         toastr.success("Added to favourite")
+          }
         } else{
          console.log("Iside suggestion Search Hero", item);
          let searchItem=item.textContent;
          searchItem=searchItem.replace('AddToFavt','');
          console.log(searchItem);
-
          displayHeros(searchItem);
       
 
@@ -138,13 +146,10 @@ function showSuggestion(suggestion){
 
 
 
-
+// This Function is to display specific type of heros based on the hero name
 function displayHeros(seachInputText){
 
- 
    let html='';
-
-
    fetch(`https://gateway.marvel.com:443/v1/public/characters?ts=1&apikey=c6a98dad0694af1086e032725e906e63&hash=8ff042df82c2883916fd6cb327514f6a&limit=100&offset=30`)
    .then(response=>response.json())
    .then(data=>{
@@ -192,22 +197,16 @@ function displayHeros(seachInputText){
                
             }
    
-   
-   
          })
       }
-   
-
 
    })
-   
-
 
 
 }
 
 
-
+//This Function is call when search botton is click a
  function findSeachHero(){
       
       let seachInputText=document.querySelector('.search-hero').value.trim();
@@ -216,21 +215,7 @@ function displayHeros(seachInputText){
 
  }
 
- function getHeros(){
-   let apiRes;
-     fetch(`https://gateway.marvel.com:443/v1/public/characters?ts=1&apikey=c6a98dad0694af1086e032725e906e63&hash=8ff042df82c2883916fd6cb327514f6a&limit=100&offset=30`)
-     .then(response=>response.json())
-     .then(data=>{
-        
-          apiRes=data;
-  
-
-     })
-
-     console.log("Get Heros :", apiRes);
-    
- }
-
+// This Functions Loads the list Heros and dsiplay in Hhome Page
  function renderHomePage(){
 
    let html='';
@@ -291,6 +276,7 @@ function displayHeros(seachInputText){
  }
 
 
+ //Fucntion to check the events i,e clicks done in Hero container 
 function checkHeroContainerAction(e){
 
     e.preventDefault();
@@ -304,24 +290,25 @@ function checkHeroContainerAction(e){
      
       if(item.classList[2]=="fvt"){
          const favtheroSelected=item.parentElement;
+         //If Already added to fvaourite then remove from the favourite
          if(favtheroSelected.classList[1]=="favourite-added"){
             const eleSelected =item.parentElement;
             console.log("element selected",eleSelected)
             var favId=eleSelected.childNodes[0].id;
             removeFromLocalStorage(favId);
-
-           // removeFromLocalStorage();
-         }
+            renderHomePage();
+         }  // if not added to favourite then add to favourite
          else{
             console.log('fvt-parentelement :',favtheroSelected);
             favtheroSelected.classList.add("favourite-added");
             var favId=favtheroSelected.childNodes[0].id;
             savefvtToLocal(favId);
+            renderHomePage();
          }
         
  
      }
-
+    // Check if user click the Show Details Button or not if yes then fetch the details and will call show detail fucntion
      if(item.classList[0]=="hero-details-btn")
      {
       const heroId=item.id;
@@ -336,8 +323,6 @@ function checkHeroContainerAction(e){
                if(listofHero.id==heroId){
                    showHeroDetails(listofHero);
                }
-            
-
                
             })
      
@@ -348,7 +333,8 @@ function checkHeroContainerAction(e){
 
  }}    
 
-   function showHeroDetails(listofHero){
+ // Function to show details of an Hero
+ function showHeroDetails(listofHero){
        
    console.log('Inside Show Hero Details Func -->  hero selected :', listofHero);
   let html='';
@@ -387,9 +373,8 @@ function checkHeroContainerAction(e){
    }
 
 
+//Function to save the favt heros in local storage
  function savefvtToLocal(favourite){
-
-   //checl already there 
    let lstfavourites;
    if(localStorage.getItem('lstfavourites')==null){
       lstfavourites=[];
@@ -403,6 +388,7 @@ function checkHeroContainerAction(e){
 
 }
 
+// function to get the favourites from the local storage
 function getFavourites(){
    let lstfavourites;
    if(localStorage.getItem('lstfavourites')==null){
@@ -413,9 +399,8 @@ function getFavourites(){
    return lstfavourites;
 }
 
-
+// Funciton to check if hero is already added or not in local storage
 function isHeroAddedToFvt(heroID){
-
  let checkFvt=false;
  let listOfFavts=getFavourites();
  listOfFavts.forEach(function(heroIdDB){
@@ -428,11 +413,11 @@ function isHeroAddedToFvt(heroID){
  return checkFvt;
 }
 
+// function to remove from the local storage
 function removeFromLocalStorage(heroId){
    let lstfavourites=getFavourites();
    console.log(heroId);
    lstfavourites.splice(lstfavourites.indexOf(heroId), 1);
    localStorage.setItem("lstfavourites", JSON.stringify(lstfavourites));
-   renderHomePage();
 
 } 

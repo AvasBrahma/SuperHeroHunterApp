@@ -12,6 +12,8 @@ body{
     line-height: 1.6;
 }
 
+/*  Header section stylying */
+
 .header-section{
     width: 100%;
     /* margin: 0 auto; */
@@ -50,7 +52,10 @@ body{
 }
 
 
+
 /*  Favouitie Super Hero Container Style */
+
+
 .load-favourites{
     max-width: 1280px;
     margin: 0 auto;
@@ -70,8 +75,6 @@ body{
      margin: 2rem 0;
      border: 2px solid black;
      
-     
-
 }
 
 .fvt-hero-img img{
@@ -122,9 +125,7 @@ body{
     margin: 1rem auto;
     border-radius: 0.8rem;
     transition: all 0.4s linear;
-    margin-left: 120px;
-    
-   
+    margin-left: 120px; 
 
 }
 .favourite-added{
@@ -133,7 +134,6 @@ body{
 }
 
 /* Media Queries for SuperHero Container */
-
 
 @media screen and (min-width: 768px){
 

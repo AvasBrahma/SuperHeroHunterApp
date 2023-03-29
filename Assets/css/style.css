@@ -12,6 +12,8 @@ body{
     line-height: 1.6;
 }
 
+/*  ----------    Header Section Styling -------    */
+
 .header-section{
     width: 100%;
     /* margin: 0 auto; */
@@ -56,6 +58,7 @@ body{
 
 }
 
+/* S-----------Search BOX Section Styling----------- */
 
 .search-element{
     font-family: inherit;
@@ -88,7 +91,7 @@ body{
     margin-left: -2rem;
     margin-top: 2rem;
 }  
-
+/* Suggestion Box Styling */
 .autocom-box{
     /* border: 2px solid rgb(168, 27, 27); */ 
    border-radius: 3rem;
@@ -98,8 +101,6 @@ body{
    opacity: 0;   
    margin-left: -0.1rem;
    pointer-events: none;
-
-   
    
 }
 
@@ -109,8 +110,6 @@ body{
    pointer-events: auto;
 
 }
-
-
 
 .autocom-box li{
     /* border: 2px solid rebeccapurple; */
@@ -133,8 +132,8 @@ body{
     margin-right: 1rem;
     float: right;
     font-size: 18px;
-    background-color: rgb(188, 30, 30);
-    border: 2px solid black;
+    background-color: rgb(159, 211, 111);
+    border: 2px solid rgb(14, 13, 13);
 }
 .autocom-box li:hover{
     background: #efefef;
@@ -159,6 +158,7 @@ body{
 
 
 /*  Super Hero Container Style */
+
 .load-superhero{
     max-width: 1280px;
     margin: 0 auto;
@@ -177,8 +177,6 @@ body{
      box-shadow: 0 4px 21px -12px, rgba(0, 0, 0, 0.79);
      margin: 2rem 0;
      border: 2px solid black;
-     
-     
 
 }
 
@@ -245,9 +243,6 @@ body{
 }
 
 /*  Hero Details Section  */
-
-
-/* Meal Details  */
 
 .hero-details{
     position: fixed;
@@ -362,8 +357,7 @@ body{
 }
 
 
-
-
+/* Header Titile Animation Bounce KeyFrames  */
 
 @keyframes bounce-in-top{
     0%{
@@ -383,7 +377,8 @@ body{
     }
 }
 
-/* Media Queries for SuperHero Container */
+
+/* Media Queries for Responsive design*/
 
 @media screen and (width: 500px){
 
